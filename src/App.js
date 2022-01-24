@@ -18,7 +18,7 @@ function App() {
   },[]);
 
   let data = JSON.stringify({fullName:fullName, ID:ID, ipAddress:ipAddress, phoneNumber:phoneNumber});
-  
+
   const addClient = () =>{
     Axios.post("http://localhost:3003/api/insert", data, {headers:{"Content-Type" : "application/json"}})
     .then(function(response) {
