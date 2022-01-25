@@ -17,23 +17,22 @@ function App() {
     });
   },[]);
 
-  let data = JSON.stringify({fullName:fullName, ID:ID, ipAddress:ipAddress, phoneNumber:phoneNumber});
+  // let data = JSON.stringify({fullName:fullName, ID:ID, ipAddress:ipAddress, phoneNumber:phoneNumber});
 
   const addClient = () =>{
-    Axios.post("http://localhost:3003/api/insert", data, {headers:{"Content-Type" : "application/json"}})
-    .then(function(response) {
-        console.log(response);
-      }).catch(function(error) {
-        console.log(error);
-      })
+    Axios.post("http://localhost:3003/api/insert",{
+      fullName:fullName, ID:ID, ipAddress:ipAddress, phoneNumber:phoneNumber
+    });
+
+    setClientList([
+      ...clientList,
+      {fullName:fullName, ID:ID, ipAddress:ipAddress, phoneNumber:phoneNumber},
+       ]);
   };
-  // const addClient = () =>{
-  //    Axios.post("http://localhost:3003/api/insert", {
-  //      fullName:fullName, ID:ID, ipAddress:ipAddress, phoneNumber:phoneNumber
-  //    }).then(()=>{
-  //      alert("succesful insert");
-  //    });
-  // };
+  
+  const deleteClient= (id) => {
+    Axios.delete(`http://localhost:3003/api/delete/${id}`)
+  }
 
   return (
     <div className="App">
@@ -53,16 +52,17 @@ function App() {
       }}  />
       <button onClick = {addClient}>Add</button>
       
-   
-      
       {clientList.map((val)=>{
           return (
-          <h1>
-          Full Name: {val.fullName} | ID:{val.ID} | ipAddress:{val.ipAddress} | phoneNumber:{val.phoneNumber}
-          </h1>
+          <div className= "card">
+          <h2> {val.fullName} </h2>
+          <h4>{val.ID}</h4>
+          <h4>{val.ipAddress}</h4>
+          <h4>{val.phoneNumber}</h4>
+          <button onClick={()=> {deleteClient(val.ID)}}>Delete</button>
+          </div>
           );
-          
-      })};
+      })}
 
       </div>
     </div>
