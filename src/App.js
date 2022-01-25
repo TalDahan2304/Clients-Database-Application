@@ -1,7 +1,8 @@
 import {useState} from 'react';
 import {useEffect} from 'react';
 import './App.css';
-import Axios from 'axios'
+import Axios from 'axios';
+
 
 function App() {
   const [fullName, setfullName]= useState('')
@@ -17,8 +18,6 @@ function App() {
     });
   },[]);
 
-  // let data = JSON.stringify({fullName:fullName, ID:ID, ipAddress:ipAddress, phoneNumber:phoneNumber});
-
   const addClient = () =>{
     Axios.post("http://localhost:3003/api/insert",{
       fullName:fullName, ID:ID, ipAddress:ipAddress, phoneNumber:phoneNumber
@@ -33,6 +32,7 @@ function App() {
   const deleteClient= (id) => {
     Axios.delete(`http://localhost:3003/api/delete/${id}`)
   }
+
 
   return (
     <div className="App">
