@@ -23,7 +23,7 @@ app.get('/api/get', (req, res)=>{
 
  });
 })
- //989
+
 
 app.post("/api/insert", (req, res)=>{
     const fullName=req.body.fullName;
@@ -36,6 +36,15 @@ app.post("/api/insert", (req, res)=>{
     db.query(sqlInsert, [fullName,ID,ipAddress,phoneNumber], (err, result)=>{
         console.log(result);
 
+    });
+});
+
+app.delete("/api/delete/:ID", (req, res)=>{
+    const id = req.params.ID;
+    const sqlDelete=
+    "DELETE FROM clients_db WHERE ID = ? ";
+    db.query(sqlDelete, id, (err,result)=> {
+       if (err) console.log(err);
     });
 });
 
