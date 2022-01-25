@@ -38,22 +38,25 @@ function App() {
     <div className="App">
       <h1>Clients database Application</h1>
       <div className="form">
-      <input type="text" placeholder="Full Name" name="FullName" onChange={(e)=>{
+      <div className="addClient" >
+      <input type="text"  placeholder="Full Name" minlenght="2" name="FullName"  onChange={(e)=>{
         setfullName(e.target.value)
-      }} />
-      <input type="text" placeholder="ID" name="ID" onChange={(e)=>{
+      }} required/>
+      <input type="text" placeholder="ID" minlenght="9"  name="ID" onChange={(e)=>{
         setID(e.target.value)
-      }}  />
-      <input type="text" placeholder="IP Address" name="IPAddress" onChange={(e)=>{
+      }}  required/>
+      <input type="text" placeholder="IP Address" minlenght="8" name="IPAddress" onChange={(e)=>{
         setipAddress(e.target.value)
-      }}  />
-      <input type="text" placeholder="Phone Number" name="PhoneNumber"onChange={(e)=>{
+      }}  required/>
+      <input type="text" placeholder="Phone Number" minlenght="9" name="PhoneNumber" onChange={(e)=>{
         setphoneNumber(e.target.value)
-      }}  />
-      <button onClick = {addClient}>Add</button>
-      
+      }}  required/>
+      <button onClick = {addClient} id="addClient-btn">Add Client</button>
+      </div>
+      <div className= "AllCards">
       {clientList.map((val)=>{
           return (
+          
           <div className= "card">
           <h2> {val.fullName} </h2>
           <h4>{val.ID}</h4>
@@ -61,8 +64,10 @@ function App() {
           <h4>{val.phoneNumber}</h4>
           <button onClick={()=> {deleteClient(val.ID)}}>Delete</button>
           </div>
+          
           );
       })}
+      </div>
 
       </div>
     </div>
